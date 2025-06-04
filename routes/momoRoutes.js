@@ -5,12 +5,14 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const Booking = require('../models/booking'); // Giả định đây là đường dẫn đến model Booking
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 // MoMo configuration (Test environment)
 const config = {
     partnerCode: process.env.MOMO_PARTNER_CODE,
     accessKey: process.env.MOMO_ACCESS_KEY,
     secretKey: process.env.MOMO_SECRET_KEY,
-    redirectUrl: process.env.MOMO_REDIRECT_URL || 'http://localhost:3000/bookings',
+    redirectUrl: process.env.MOMO_REDIRECT_URL || `${API_URL}/bookings`,
     ipnUrl: process.env.MOMO_IPN_URL || 'https://your-production-ipn-url',
     requestType: 'payWithMethod',
     autoCapture: true,
