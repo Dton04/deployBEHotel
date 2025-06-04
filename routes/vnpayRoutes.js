@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const Booking = require('../models/booking');
 const moment = require('moment');
 
+const API_URL = process.env.REACT_APP_API_URL;
+
+
 const config = {
     tmnCode: process.env.VNPAY_TMN_CODE,
     hashSecret: process.env.VNPAY_HASH_SECRET,
@@ -153,7 +156,7 @@ router.get('/vnpay_return', async (req, res) => {
                 });
 
                 // Redirect về client với URL đầy đủ (development)
-                res.redirect(`https://hoteriernhom3.onrender.com/booking-success?bookingId=${booking._id}`);
+                res.redirect(`${API_URL}/api/booking-success?bookingId=${booking._id}`);
             } else {
                 await Booking.findByIdAndUpdate(booking._id, {
                     paymentStatus: 'canceled',
@@ -161,7 +164,7 @@ router.get('/vnpay_return', async (req, res) => {
                     console.error('Lỗi khi cập nhật booking thất bại:', err);
                     throw err;
                 });
-                res.redirect(`https://hoteriernhom3.onrender.com/booking-failed?bookingId=${booking._id}`);
+                res.redirect(`${API_URL}/api/booking-failed?bookingId=${booking._id}`);
             }
         } else {
             res.status(400).json({ message: 'Chữ ký không hợp lệ' });

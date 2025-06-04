@@ -7,12 +7,13 @@ const Booking = require('../models/booking'); // Giả định đây là đườ
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+
 // MoMo configuration (Test environment)
 const config = {
     partnerCode: process.env.MOMO_PARTNER_CODE,
     accessKey: process.env.MOMO_ACCESS_KEY,
     secretKey: process.env.MOMO_SECRET_KEY,
-    redirectUrl: process.env.MOMO_REDIRECT_URL || "https://hoteriernhom3.onrender.com/bookings",
+    redirectUrl: process.env.MOMO_REDIRECT_URL || 'https://hoteriernhom3.onrender.com',
     ipnUrl: process.env.MOMO_IPN_URL || 'https://your-production-ipn-url',
     requestType: 'payWithMethod',
     autoCapture: true,
