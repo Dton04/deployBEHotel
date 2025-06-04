@@ -256,11 +256,11 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
  * @desc    Xử lý callback từ Google OAuth
  * @access  Công khai
  */
-router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: 'http://localhost:3000/login?error=Google authentication failed' }), async (req, res) => {
+router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: 'https://hoteriernhom3.onrender.com/login?error=Google authentication failed' }), async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select('-password');
       if (!user) {
-        return res.redirect('http://localhost:3000/login?error=User not found');
+        return res.redirect('https://hoteriernhom3.onrender.com/login?error=User not found');
       }
 
       // Tạo JWT token
@@ -282,10 +282,10 @@ router.get('/google/callback', passport.authenticate('google', { session: false,
 
       // Mã hóa dữ liệu người dùng vào URL query
       const userDataParam = encodeURIComponent(JSON.stringify(userData));
-      res.redirect(`http://localhost:3000/auth/google/callback?user=${userDataParam}`);
+      res.redirect(`https://hoteriernhom3.onrender.com/auth/google/callback?user=${userDataParam}`);
     } catch (error) {
       console.error('Google callback error:', error.message);
-      res.redirect('http://localhost:3000/login?error=Google authentication failed');
+      res.redirect('https://hoteriernhom3.onrender.com/login?error=Google authentication failed');
     }
   }
 );
@@ -304,12 +304,12 @@ router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
  */
 router.get(
   '/facebook/callback',
-  passport.authenticate('facebook', { session: false, failureRedirect: 'http://localhost:3000/login?error=Facebook authentication failed' }),
+  passport.authenticate('facebook', { session: false, failureRedirect: 'https://hoteriernhom3.onrender.com/login?error=Facebook authentication failed' }),
   async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select('-password');
       if (!user) {
-        return res.redirect('http://localhost:3000/login?error=User not found');
+        return res.redirect('https://hoteriernhom3.onrender.com/login?error=User not found');
       }
 
       // Tạo JWT token
@@ -331,10 +331,10 @@ router.get(
 
       // Mã hóa dữ liệu người dùng vào URL query
       const userDataParam = encodeURIComponent(JSON.stringify(userData));
-      res.redirect(`http://localhost:3000/auth/facebook/callback?user=${userDataParam}`);
+      res.redirect(`https://hoteriernhom3.onrender.com/auth/facebook/callback?user=${userDataParam}`);
     } catch (error) {
       console.error('Facebook callback error:', error.message);
-      res.redirect('http://localhost:3000/login?error=Facebook authentication failed');
+      res.redirect('https://hoteriernhom3.onrender.com/login?error=Facebook authentication failed');
     }
   }
 );
